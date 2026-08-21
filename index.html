@@ -82,21 +82,6 @@ body::before{
   filter:drop-shadow(0 30px 40px rgba(0,0,0,.45));
 }
 
-/* botón saltar */
-.saltar{
-  position:absolute; top:6px; right:6px;
-  background:rgba(20,16,14,.55);
-  border:1px solid rgba(192,138,62,.5);
-  color:var(--brass-lt);
-  font-family:var(--util);
-  font-size:.6rem; letter-spacing:.26em; text-transform:uppercase;
-  padding:.55rem 1rem; border-radius:999px;
-  cursor:pointer;
-  transition:opacity .4s ease, background .3s ease;
-}
-.saltar:hover{ background:var(--brass); color:var(--slate); }
-.saltar.oculto{ opacity:0; pointer-events:none; }
-
 /* estrellas titilando */
 .estrella{ animation:titila 3s ease-in-out infinite; }
 .estrella:nth-child(2n){ animation-delay:1s; }
@@ -138,6 +123,23 @@ body::before{
 @keyframes pulso{
   0%,100%{ filter:drop-shadow(0 0 8px  rgba(232,193,121,.9))  drop-shadow(0 0 22px rgba(232,193,121,.45)); }
   50%    { filter:drop-shadow(0 0 16px rgba(232,193,121,1))   drop-shadow(0 0 40px rgba(232,193,121,.7)); }
+}
+
+/* el besito: se inclinan el uno hacia el otro */
+.cuerpo{
+  transform-box:fill-box;
+  transform-origin:50% 100%;
+  transition:transform .65s cubic-bezier(.3,1.3,.4,1);
+}
+.lean-r .cuerpo{ transform:rotate(10deg); }
+.lean-l .cuerpo{ transform:rotate(-9deg); }
+
+/* corazón grande que late */
+#corazon path{ transform-box:fill-box; transform-origin:center; }
+.late{ animation:late 1.3s ease-in-out infinite; }
+@keyframes late{
+  0%,100%{ transform:scale(2.2); }
+  50%    { transform:scale(2.5); }
 }
 
 /* título tras la escena */
@@ -488,6 +490,54 @@ body::before{
       <!-- resplandor detrás de ella -->
       <ellipse id="aureola-ella" cx="806" cy="185" rx="95" ry="115" fill="url(#aura)" opacity="0"/>
 
+      <!-- ===================== ÉL (Felipe) ===================== -->
+      <g id="felipe" style="transform:translate(-70px,460px)">
+        <ellipse cx="0" cy="2" rx="24" ry="6" fill="#000" opacity=".35"/>
+        <g class="cuerpo">
+          <!-- piernas -->
+          <g class="pierna p1">
+            <rect x="-10" y="-30" width="7" height="28" rx="3.5" fill="#26201b"/>
+            <path d="M-12 -6 h14 a3 3 0 0 1 3 3 v1 h-17 z" fill="#0f0c0a"/>
+          </g>
+          <g class="pierna p2">
+            <rect x="3" y="-30" width="7" height="28" rx="3.5" fill="#26201b"/>
+            <path d="M1 -6 h14 a3 3 0 0 1 3 3 v1 h-17 z" fill="#0f0c0a"/>
+          </g>
+          <!-- camisa -->
+          <path d="M-12 -98 L12 -98 L16 -28 L-16 -28 Z" fill="#efe6d2"/>
+          <!-- chaleco -->
+          <path d="M-12 -98 L-4 -94 L-8 -28 L-16 -28 Z" fill="#2a211a"/>
+          <path d="M12 -98 L4 -94 L8 -28 L16 -28 Z"    fill="#2a211a"/>
+          <!-- corbatín -->
+          <path d="M0 -92 l-7 -4 v8 z" fill="var(--paprika)"/>
+          <path d="M0 -92 l7 -4 v8 z"  fill="var(--paprika)"/>
+          <circle cx="0" cy="-92" r="1.8" fill="#7c2517"/>
+          <!-- brazo derecho abajo -->
+          <path d="M12 -93 L21 -58 a5 5 0 0 1 -9 2 L6 -88 Z" fill="#efe6d2"/>
+          <circle cx="18" cy="-54" r="4.5" fill="#d9976b"/>
+          <!-- brazo izquierdo con el ramo -->
+          <path d="M-12 -93 L-22 -70 a5 5 0 0 0 8 5 L-5 -86 Z" fill="#efe6d2"/>
+          <circle cx="-18" cy="-66" r="4.5" fill="#d9976b"/>
+          <!-- ramo de flores -->
+          <g>
+            <path d="M-18 -68 L-25 -85 M-18 -68 L-18 -88 M-18 -68 L-11 -85" stroke="var(--herb)" stroke-width="2" fill="none"/>
+            <circle cx="-25" cy="-88" r="4.2" fill="var(--paprika)"/>
+            <circle cx="-18" cy="-91" r="4.2" fill="var(--brass-lt)"/>
+            <circle cx="-11" cy="-88" r="4.2" fill="#e8a0b4"/>
+            <circle cx="-25" cy="-88" r="1.4" fill="#f6e2ae"/>
+            <circle cx="-18" cy="-91" r="1.4" fill="#a8341f"/>
+            <circle cx="-11" cy="-88" r="1.4" fill="#f6e2ae"/>
+            <path d="M-25 -73 L-18 -64 L-11 -73" fill="none" stroke="#cbbc9c" stroke-width="2"/>
+          </g>
+          <!-- cabeza -->
+          <circle cx="0" cy="-110" r="13" fill="#d9976b"/>
+          <path d="M-13 -112 a13 13 0 0 1 26 0 l0 2 c-6 -9 -20 -9 -26 0 Z" fill="#241812"/>
+          <circle cx="-4.5" cy="-108" r="1.4" fill="#2a211a"/>
+          <circle cx="4.5"  cy="-108" r="1.4" fill="#2a211a"/>
+          <path d="M-3 -103 Q0 -100 3 -103" stroke="#2a211a" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+        </g>
+      </g>
+
       <!-- ===================== ELLA ===================== -->
       <g id="chica" style="transform:translate(70px,460px)">
         <ellipse cx="0" cy="2" rx="24" ry="6" fill="#000" opacity=".35"/>
@@ -578,11 +628,17 @@ body::before{
         </g>
       </g>
 
+      <!-- corazón del besito -->
+      <g id="corazon" style="transform:translate(783px,92px)" opacity="0">
+        <path id="corazon-path"
+              d="M0,10 C-3,3 -15,-7 -15,-17 C-15,-27 -5,-30 0,-22 C5,-30 15,-27 15,-17 C15,-7 3,3 0,10 Z"
+              fill="var(--paprika)" stroke="var(--brass-lt)" stroke-width="1.6"
+              style="transform:scale(0)"/>
+      </g>
+
       <!-- chispas -->
       <g id="chispas"></g>
     </svg>
-
-    <button class="saltar" id="saltar">Saltar ›</button>
   </div>
 
   <div class="hero-texto" id="hero-texto">
@@ -842,11 +898,13 @@ const chica    = document.getElementById('chica');
 const cuerpoBrazosAbajo  = document.getElementById('brazos-abajo');
 const cuerpoBrazosArriba = document.getElementById('brazos-arriba');
 const diploma  = document.getElementById('diploma');
+const felipe   = document.getElementById('felipe');
+const corazon  = document.getElementById('corazon');
+const corazonPath = document.getElementById('corazon-path');
 const haz      = document.getElementById('haz-luz');
 const aureola  = document.getElementById('aureola-ella');
 const chispasG = document.getElementById('chispas');
 const heroTxt  = document.getElementById('hero-texto');
-const btnSaltar= document.getElementById('saltar');
 
 let anims = [];        // animaciones activas (para saltar / reiniciar)
 let saltado = false;
@@ -888,13 +946,36 @@ function chispas(cx, cy, n = 16){
   }
 }
 
+/* corazoncitos que flotan hacia arriba */
+function corazoncitos(cx, cy, n = 9){
+  for (let i = 0; i < n; i++){
+    const h = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    h.setAttribute('d', 'M0,5 C-1.5,1.5 -7,-3 -7,-8 C-7,-13 -2,-14 0,-10 C2,-14 7,-13 7,-8 C7,-3 1.5,1.5 0,5 Z');
+    h.setAttribute('fill', i % 2 ? 'var(--paprika)' : '#e8a0b4');
+    chispasG.appendChild(h);
+    const dx = (Math.random() - .5) * 80;
+    const dy = -(60 + Math.random() * 100);
+    const a = h.animate([
+      { transform: `translate(${cx}px,${cy}px) scale(0)`, opacity: 1 },
+      { transform: `translate(${cx + dx * .5}px,${cy + dy * .5}px) scale(${.8 + Math.random() * .7})`, opacity: 1, offset: .5 },
+      { transform: `translate(${cx + dx}px,${cy + dy}px) scale(.35)`, opacity: 0 }
+    ], { duration: 1600 + Math.random() * 900, delay: Math.random() * 550, easing: 'ease-out' });
+    a.onfinish = () => h.remove();
+  }
+}
+
 /* estado inicial de la escena */
 function resetEscena(){
   anims.forEach(a => a.cancel());
   anims = [];
   saltado = false;
-  chica.classList.remove('walking', 'brilla');
+  chica.classList.remove('walking', 'brilla', 'lean-l');
   chica.style.transform = 'translate(70px,460px)';
+  felipe.classList.remove('walking', 'lean-r');
+  felipe.style.transform = 'translate(-70px,460px)';
+  corazon.style.opacity = '0';
+  corazonPath.classList.remove('late');
+  corazonPath.style.transform = 'scale(0)';
   diploma.style.transform = 'translate(806px,-90px)';
   diploma.style.opacity = '0';
   diploma.classList.remove('bajando');
@@ -906,7 +987,6 @@ function resetEscena(){
   cuerpoBrazosArriba.style.opacity = '0';
   heroTxt.classList.remove('show');
   hero.classList.remove('fin');
-  btnSaltar.classList.remove('oculto');
   chispasG.innerHTML = '';
 }
 
@@ -976,18 +1056,69 @@ async function contarLaHistoria(){
   move(haz, [{ opacity: 1 }, { opacity: .45 }], 1400);
   await espera(900);
 
-  /* 6 — el mensaje */
+  /* 6 — llega él, con flores, a darle su besito */
+  felipe.classList.add('walking');
+  await move(felipe,
+    [{ transform: 'translate(-70px,460px)' }, { transform: 'translate(388px,460px)' }],
+    2500);
+  let fx = 388, fy = 460;
+  for (const [nx, ny] of pasos){
+    await move(felipe, [
+      { transform: `translate(${fx}px,${fy}px)` },
+      { transform: `translate(${(fx+nx)/2}px,${ny-16}px)`, offset: .5 },
+      { transform: `translate(${nx}px,${ny}px)` }
+    ], 520, 'ease-in-out');
+    fx = nx; fy = ny;
+  }
+  await move(felipe,
+    [{ transform: `translate(${fx}px,${fy}px)` }, { transform: 'translate(758px,250px)' }],
+    650);
+  felipe.classList.remove('walking');
+  await espera(300);
+
+  /* 7 — el besito y el corazón */
+  felipe.classList.add('lean-r');
+  chica.classList.add('lean-l');
+  move(diploma, [
+    { transform: 'translate(806px,131px) rotate(0deg)' },
+    { transform: 'translate(794px,134px) rotate(-8deg)' }
+  ], 650, 'ease-out');
+  await espera(680);
+
+  corazoncitos(783, 128, 9);
+  corazon.style.opacity = '1';
+  await move(corazonPath, [
+    { transform: 'scale(0)' },
+    { transform: 'scale(2.7)', offset: .55 },
+    { transform: 'scale(2.05)', offset: .8 },
+    { transform: 'scale(2.3)' }
+  ], 950, 'cubic-bezier(.34,1.4,.4,1)');
+  corazonPath.getAnimations().forEach(a => a.cancel());
+  corazonPath.style.transform = 'scale(2.3)';
+  corazonPath.classList.add('late');
+
+  if (!saltado && !reduce){
+    const p = posPantalla();
+    burst(55, p.x, p.y - 40, .95);
+    corazoncitos(783, 100, 8);
+    chispas(783, 120, 10);
+  }
+  await espera(1100);
+
+  /* se enderezan, pero el corazón se queda latiendo */
+  felipe.classList.remove('lean-r');
+  chica.classList.remove('lean-l');
+  move(diploma, [
+    { transform: 'translate(794px,134px) rotate(-8deg)' },
+    { transform: 'translate(806px,131px) rotate(0deg)' }
+  ], 650, 'ease-out');
+  await espera(500);
+
+  /* 8 — el mensaje */
   heroTxt.classList.add('show');
   hero.classList.add('fin');
-  btnSaltar.classList.add('oculto');
   corriendo = false;
 }
-
-/* saltar la intro */
-btnSaltar.addEventListener('click', () => {
-  saltado = true;
-  anims.forEach(a => { try{ a.finish(); }catch(e){} });
-});
 
 /* ver de nuevo */
 document.getElementById('replay').addEventListener('click', () => {
