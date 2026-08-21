@@ -126,7 +126,7 @@ body::before{
 }
 
 /* saludo con la mano */
-.saludo-brazo{ transform-box:fill-box; transform-origin:20% 90%; }
+.saludo-brazo{ transform-box:fill-box; transform-origin:80% 90%; }
 .saludando .saludo-brazo{ animation:saluda .9s ease-in-out infinite; }
 @keyframes saluda{
   0%,100%{ transform:rotate(-14deg); }
@@ -593,11 +593,11 @@ body::before{
 
           <!-- brazos saludando (diploma en una mano) -->
           <g id="brazos-saludo" opacity="0">
-            <path d="M-12 -95 L-20 -66 a5 5 0 0 0 9 3 L-5 -90 Z" fill="#1d1815"/>
-            <circle cx="-16" cy="-62" r="4.5" fill="#e6a97e"/>
+            <path d="M12 -95 L20 -66 a5 5 0 0 1 -9 3 L5 -90 Z" fill="#1d1815"/>
+            <circle cx="16" cy="-62" r="4.5" fill="#e6a97e"/>
             <g class="saludo-brazo">
-              <path d="M12 -95 L26 -112 a5 5 0 0 0 -6 -7 L4 -98 Z" fill="#1d1815"/>
-              <circle cx="23" cy="-116" r="4.5" fill="#e6a97e"/>
+              <path d="M-12 -95 L-26 -112 a5 5 0 0 1 6 -7 L-4 -98 Z" fill="#1d1815"/>
+              <circle cx="-23" cy="-116" r="4.5" fill="#e6a97e"/>
             </g>
           </g>
 
@@ -652,7 +652,7 @@ body::before{
       </g>
 
       <!-- corazón del besito -->
-      <g id="corazon" style="transform:translate(783px,78px)" opacity="0">
+      <g id="corazon" style="transform:translate(776px,70px)" opacity="0">
         <path id="corazon-path"
               d="M0,10 C-3,3 -15,-7 -15,-17 C-15,-27 -5,-30 0,-22 C5,-30 15,-27 15,-17 C15,-7 3,3 0,10 Z"
               fill="var(--paprika)" stroke="var(--brass-lt)" stroke-width="1.6"
@@ -1100,7 +1100,7 @@ async function contarLaHistoria(){
   chica.classList.add('saludando');
   await move(diploma, [
     { transform: 'translate(806px,112px) rotate(0deg)' },
-    { transform: 'translate(790px,186px) rotate(-35deg)' }
+    { transform: 'translate(822px,188px) rotate(35deg)' }
   ], 800, 'ease-in-out');
 
   /* 7 — llega él, con flores, a darle su besito */
@@ -1118,7 +1118,7 @@ async function contarLaHistoria(){
     fx = nx; fy = ny;
   }
   await move(felipe,
-    [{ transform: `translate(${fx}px,${fy}px)` }, { transform: 'translate(758px,250px)' }],
+    [{ transform: `translate(${fx}px,${fy}px)` }, { transform: 'translate(746px,250px)' }],
     650);
   felipe.classList.remove('walking');
   await espera(300);
@@ -1128,12 +1128,12 @@ async function contarLaHistoria(){
   felipe.classList.add('lean-r');
   chica.classList.add('lean-l');
   move(diploma, [
-    { transform: 'translate(790px,186px) rotate(-35deg)' },
-    { transform: 'translate(779px,191px) rotate(-44deg)' }
+    { transform: 'translate(822px,188px) rotate(35deg)' },
+    { transform: 'translate(812px,187px) rotate(26deg)' }
   ], 650, 'ease-out');
   await espera(680);
 
-  corazoncitos(783, 128, 9);
+  corazoncitos(776, 124, 9);
   corazon.style.opacity = '1';
   await move(corazonPath, [
     { transform: 'scale(0)' },
@@ -1148,8 +1148,8 @@ async function contarLaHistoria(){
   if (!saltado && !reduce){
     const p = posPantalla();
     burst(55, p.x, p.y - 40, .95);
-    corazoncitos(783, 100, 8);
-    chispas(783, 120, 10);
+    corazoncitos(776, 96, 8);
+    chispas(776, 116, 10);
   }
   await espera(1100);
 
@@ -1157,8 +1157,8 @@ async function contarLaHistoria(){
   felipe.classList.remove('lean-r');
   chica.classList.remove('lean-l');
   move(diploma, [
-    { transform: 'translate(779px,191px) rotate(-44deg)' },
-    { transform: 'translate(790px,186px) rotate(-35deg)' }
+    { transform: 'translate(812px,187px) rotate(26deg)' },
+    { transform: 'translate(822px,188px) rotate(35deg)' }
   ], 650, 'ease-out');
   chica.classList.add('saludando');
   await espera(500);
