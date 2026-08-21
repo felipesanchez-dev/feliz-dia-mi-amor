@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Felicidades, chef</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   PALETA — carta de restaurante en servicio de noche
+   ========================================================= */
+:root{
+  --slate:    #14100e;
+  --slate-2:  #1d1714;
+  --paper:    #efe6d2;
+  --paper-2:  #e3d6ba;
+  --brass:    #c08a3e;
+  --brass-lt: #e8c179;
+  --paprika:  #a8341f;
+  --herb:     #6f7f5c;
+  --ink:      #2a211a;
+  --ink-soft: #6d5c48;
+
+  --display: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --util:    'Jost', 'Avenir Next', system-ui, -apple-system, sans-serif;
+  --script:  'Great Vibes', 'Segoe Script', cursive;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+
+body{
+  background:
+    radial-gradient(1100px 700px at 50% -10%, #2b211a 0%, transparent 60%),
+    radial-gradient(800px 600px at 90% 110%, #241b17 0%, transparent 65%),
+    var(--slate);
+  color:var(--paper);
+  font-family:var(--util);
+  font-weight:300;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  opacity:.05;
+  background-image:
+    repeating-linear-gradient(0deg,  #fff 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, #fff 0 1px, transparent 1px 3px);
+}
+
+.eyebrow{
+  font-family:var(--util);
+  font-size:.68rem; font-weight:400;
+  letter-spacing:.42em; text-transform:uppercase;
+  color:var(--brass);
+}
+.rule{ width:56px; height:1px; background:var(--brass); opacity:.6; margin:1.4rem auto; }
+
+#fx{ position:fixed; inset:0; z-index:90; pointer-events:none; }
+
+/* =========================================================
+   HERO — LA ESCENA
+   ========================================================= */
+.hero{
+  position:relative; z-index:2;
+  min-height:100svh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center;
+  padding:2.5rem 1rem 5rem;
+}
+
+.escena-wrap{
+  width:min(940px, 96vw);
+  position:relative;
+}
+#escena{
+  width:100%; height:auto; display:block;
+  filter:drop-shadow(0 30px 40px rgba(0,0,0,.45));
+}
+
+/* botón saltar */
+.saltar{
+  position:absolute; top:6px; right:6px;
+  background:rgba(20,16,14,.55);
+  border:1px solid rgba(192,138,62,.5);
+  color:var(--brass-lt);
+  font-family:var(--util);
+  font-size:.6rem; letter-spacing:.26em; text-transform:uppercase;
+  padding:.55rem 1rem; border-radius:999px;
+  cursor:pointer;
+  transition:opacity .4s ease, background .3s ease;
+}
+.saltar:hover{ background:var(--brass); color:var(--slate); }
+.saltar.oculto{ opacity:0; pointer-events:none; }
+
+/* estrellas titilando */
+.estrella{ animation:titila 3s ease-in-out infinite; }
+.estrella:nth-child(2n){ animation-delay:1s; }
+.estrella:nth-child(3n){ animation-delay:2s; animation-duration:4s; }
+@keyframes titila{ 0%,100%{ opacity:.25; } 50%{ opacity:1; } }
+
+/* banderines */
+.banderin-cuerda{ animation:mece 5s ease-in-out infinite; transform-origin:450px 0px; }
+@keyframes mece{ 0%,100%{ transform:rotate(.6deg); } 50%{ transform:rotate(-.6deg); } }
+
+/* piernas al caminar */
+.pierna{ transform-box:fill-box; transform-origin:top center; }
+.walking .p1{ animation:paso .52s ease-in-out infinite; }
+.walking .p2{ animation:paso .52s ease-in-out infinite; animation-delay:.26s; }
+@keyframes paso{ 0%,100%{ transform:rotate(20deg); } 50%{ transform:rotate(-20deg); } }
+.walking .cuerpo{ animation:trote .26s ease-in-out infinite alternate; }
+@keyframes trote{ from{ transform:translateY(0); } to{ transform:translateY(-3px); } }
+
+/* borla de ella */
+.borla-mini{ transform-box:fill-box; transform-origin:top center; animation:swing 3.2s ease-in-out infinite; }
+@keyframes swing{ 0%,100%{ transform:rotate(-10deg); } 50%{ transform:rotate(10deg); } }
+
+/* alas del diploma */
+.ala{ transform-box:fill-box; }
+.bajando .ala-l{ animation:flapL .5s ease-in-out infinite; transform-origin:right center; }
+.bajando .ala-r{ animation:flapR .5s ease-in-out infinite; transform-origin:left center; }
+@keyframes flapL{ 0%,100%{ transform:rotate(10deg); }  50%{ transform:rotate(-22deg); } }
+@keyframes flapR{ 0%,100%{ transform:rotate(-10deg); } 50%{ transform:rotate(22deg); } }
+
+/* aureola flotando */
+.aureola{ animation:flota 1.8s ease-in-out infinite; }
+@keyframes flota{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-3px); } }
+
+/* ella brilla */
+.brilla .cuerpo{
+  filter:drop-shadow(0 0 10px rgba(232,193,121,.95)) drop-shadow(0 0 26px rgba(232,193,121,.55));
+  animation:pulso 2.2s ease-in-out infinite;
+}
+@keyframes pulso{
+  0%,100%{ filter:drop-shadow(0 0 8px  rgba(232,193,121,.9))  drop-shadow(0 0 22px rgba(232,193,121,.45)); }
+  50%    { filter:drop-shadow(0 0 16px rgba(232,193,121,1))   drop-shadow(0 0 40px rgba(232,193,121,.7)); }
+}
+
+/* título tras la escena */
+.hero-texto{
+  margin-top:1.6rem;
+  opacity:0; transform:translateY(24px);
+  transition:opacity 1.1s ease, transform 1.1s cubic-bezier(.2,.9,.25,1);
+  pointer-events:none;
+}
+.hero-texto.show{ opacity:1; transform:none; pointer-events:auto; }
+.hero-texto h1{
+  font-family:var(--display);
+  font-weight:300;
+  font-size:clamp(2.6rem, 8vw, 5.4rem);
+  line-height:1;
+  color:var(--paper);
+  margin-top:.7rem;
+}
+.hero-texto h1 em{ font-style:italic; color:var(--brass-lt); }
+.hero-texto .lead{
+  max-width:34rem; margin:1.5rem auto 0;
+  font-size:clamp(1rem, 2.3vw, 1.12rem);
+  line-height:1.85; color:#cdbda5;
+}
+.acciones{ display:flex; gap:.9rem; justify-content:center; flex-wrap:wrap; }
+
+.btn{
+  margin-top:2.3rem;
+  display:inline-flex; align-items:center; gap:.7rem;
+  background:transparent;
+  border:1px solid var(--brass);
+  color:var(--brass-lt);
+  font-family:var(--util);
+  font-size:.72rem; font-weight:400;
+  letter-spacing:.3em; text-transform:uppercase;
+  padding:.95rem 1.9rem; border-radius:999px;
+  cursor:pointer;
+  transition:background .35s ease, color .35s ease, transform .2s ease;
+}
+.btn:hover{ background:var(--brass); color:var(--slate); }
+.btn:active{ transform:scale(.97); }
+.btn:focus-visible{ outline:2px solid var(--brass-lt); outline-offset:4px; }
+.btn.ghost{ border-color:rgba(192,138,62,.45); color:#b39868; }
+
+.scroll-hint{
+  position:absolute; bottom:1.6rem; left:50%; transform:translateX(-50%);
+  font-size:.6rem; letter-spacing:.36em; text-transform:uppercase;
+  color:#7d6b57;
+  opacity:0; transition:opacity 1s ease 1s;
+  animation:bob 2.6s ease-in-out infinite;
+}
+.hero.fin .scroll-hint{ opacity:1; }
+@keyframes bob{
+  0%,100%{ transform:translate(-50%,0); }
+  50%    { transform:translate(-50%,7px); }
+}
+
+/* =========================================================
+   SECCIONES
+   ========================================================= */
+.section{
+  position:relative; z-index:2;
+  padding:6.5rem 1.5rem;
+  max-width:64rem; margin:0 auto;
+}
+.section-head{ text-align:center; margin-bottom:3.6rem; }
+.section-head h2{
+  font-family:var(--display);
+  font-weight:300;
+  font-size:clamp(2.1rem, 5.5vw, 3.3rem);
+  line-height:1.1;
+  color:var(--paper);
+  margin-top:1rem;
+}
+.reveal{
+  opacity:0; transform:translateY(28px);
+  transition:opacity .9s cubic-bezier(.2,.9,.25,1), transform .9s cubic-bezier(.2,.9,.25,1);
+  transition-delay:var(--d, 0s);
+}
+.reveal.in{ opacity:1; transform:none; }
+
+/* ---- carta ---- */
+.carta{
+  background:linear-gradient(150deg, var(--paper) 0%, var(--paper-2) 100%);
+  color:var(--ink);
+  border-radius:3px;
+  padding:clamp(2rem, 5.5vw, 3.6rem);
+  box-shadow:0 32px 70px rgba(0,0,0,.5);
+  position:relative;
+}
+.carta::after{
+  content:'';
+  position:absolute; inset:14px;
+  border:1px solid rgba(42,33,26,.22);
+  border-radius:2px; pointer-events:none;
+}
+.course{ padding:1.9rem 0; border-bottom:1px dotted rgba(42,33,26,.28); }
+.course:last-child{ border-bottom:none; padding-bottom:.4rem; }
+.course:first-child{ padding-top:.4rem; }
+.course-label{
+  font-family:var(--util);
+  font-size:.62rem; letter-spacing:.34em; text-transform:uppercase;
+  color:var(--paprika);
+  display:block; margin-bottom:.7rem;
+}
+.course h3{
+  font-family:var(--display);
+  font-style:italic; font-weight:400;
+  font-size:clamp(1.5rem, 3.6vw, 2rem);
+  line-height:1.25; color:var(--ink);
+  margin-bottom:.75rem;
+}
+.course p{ font-size:1rem; line-height:1.95; color:var(--ink-soft); max-width:44rem; }
+
+/* ---- receta ---- */
+.receta{
+  display:grid;
+  grid-template-columns:1fr 1.15fr;
+  gap:clamp(1.6rem, 4vw, 3rem);
+  background:var(--slate-2);
+  border:1px solid rgba(192,138,62,.28);
+  border-radius:4px;
+  padding:clamp(1.8rem, 4.5vw, 3rem);
+}
+.receta h4{
+  font-family:var(--util);
+  font-size:.64rem; letter-spacing:.34em; text-transform:uppercase;
+  color:var(--brass);
+  margin-bottom:1.5rem; padding-bottom:.8rem;
+  border-bottom:1px solid rgba(192,138,62,.25);
+}
+.receta ul{ list-style:none; }
+.receta li{
+  font-size:.96rem; line-height:1.6;
+  color:#c9b99f;
+  padding:.62rem 0 .62rem 1.5rem;
+  position:relative;
+}
+.receta li::before{ content:'—'; position:absolute; left:0; color:var(--brass); opacity:.75; }
+.receta ol{ list-style:none; counter-reset:paso; }
+.receta ol li{ padding-left:2.4rem; padding-block:.72rem; }
+.receta ol li::before{
+  counter-increment:paso; content:counter(paso);
+  font-family:var(--display); font-size:1.15rem;
+  color:var(--brass-lt); opacity:.9;
+}
+.rinde{
+  margin-top:1.7rem; padding-top:1.1rem;
+  border-top:1px solid rgba(192,138,62,.25);
+  font-family:var(--display); font-style:italic;
+  font-size:1.18rem; color:var(--brass-lt);
+}
+.sello{
+  position:absolute; right:clamp(-6px, 1vw, 18px); top:-28px;
+  width:112px; height:112px; border-radius:50%;
+  background:var(--paprika);
+  border:2px dashed rgba(239,230,210,.5);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center;
+  transform:rotate(-13deg);
+  box-shadow:0 12px 26px rgba(0,0,0,.45);
+}
+.sello span{
+  font-family:var(--util);
+  font-size:.5rem; letter-spacing:.2em; text-transform:uppercase;
+  color:#f3e2d2; line-height:1.5;
+}
+.sello strong{
+  font-family:var(--display);
+  font-size:1.55rem; font-weight:400;
+  color:#fff; line-height:1; margin:.15rem 0;
+}
+.receta-wrap{ position:relative; }
+
+/* ---- campana ---- */
+.cloche-zone{ text-align:center; }
+.cloche{
+  position:relative;
+  width:min(340px, 82vw);
+  margin:0 auto;
+  cursor:pointer;
+  border:none; background:none; padding:0;
+  display:block;
+}
+.cloche:focus-visible{ outline:2px solid var(--brass-lt); outline-offset:10px; border-radius:8px; }
+.dome{ transition:transform 1.05s cubic-bezier(.34,1.3,.4,1), opacity .75s ease; }
+.cloche.open .dome{ transform:translateY(-170px) scale(1.04); opacity:0; }
+.cloche-hint{
+  margin-top:1.2rem;
+  font-size:.66rem; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--brass);
+  transition:opacity .5s ease;
+}
+.cloche.open + .cloche-hint{ opacity:0; }
+.secreto{
+  max-width:38rem; margin:-1.2rem auto 0;
+  opacity:0; transform:translateY(18px);
+  transition:opacity 1s ease .5s, transform 1s cubic-bezier(.2,.9,.25,1) .5s;
+  pointer-events:none;
+}
+.secreto.show{ opacity:1; transform:none; pointer-events:auto; }
+.secreto p{
+  font-family:var(--display);
+  font-size:clamp(1.28rem, 3.4vw, 1.7rem);
+  font-style:italic; line-height:1.75;
+  color:var(--paper);
+}
+.secreto .firma{
+  font-family:var(--script);
+  font-size:clamp(2rem, 5vw, 2.7rem);
+  color:var(--brass-lt);
+  margin-top:1.6rem; font-style:normal;
+}
+
+/* ---- brindis ---- */
+.brindis{ text-align:center; padding-bottom:8rem; }
+.copas{ width:min(230px, 55vw); margin:0 auto 2rem; }
+.copa-l, .copa-r{ transform-origin:50% 100%; }
+.brindis.in .copa-l{ animation:tiltL 2.4s ease-in-out .3s infinite; }
+.brindis.in .copa-r{ animation:tiltR 2.4s ease-in-out .3s infinite; }
+@keyframes tiltL{
+  0%,100%{ transform:translateX(0) rotate(0); }
+  42%    { transform:translateX(10px) rotate(11deg); }
+  55%    { transform:translateX(8px)  rotate(9deg); }
+}
+@keyframes tiltR{
+  0%,100%{ transform:translateX(0) rotate(0); }
+  42%    { transform:translateX(-10px) rotate(-11deg); }
+  55%    { transform:translateX(-8px)  rotate(-9deg); }
+}
+.brindis h2{
+  font-family:var(--display);
+  font-weight:300;
+  font-size:clamp(2.3rem, 7vw, 4rem);
+  color:var(--paper); line-height:1.1;
+}
+.brindis .fecha{
+  margin-top:2.4rem;
+  font-size:.62rem; letter-spacing:.36em; text-transform:uppercase;
+  color:#7d6b57;
+}
+
+@media (max-width:720px){
+  .receta{ grid-template-columns:1fr; }
+  .sello{ width:92px; height:92px; top:-22px; right:-4px; }
+  .section{ padding:4.5rem 1.2rem; }
+  .cloche.open .dome{ transform:translateY(-130px); }
+}
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition-duration:.01ms !important; }
+  .reveal{ opacity:1; transform:none; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="fx"></canvas>
+
+<!-- ============================ HERO / ESCENA ============================ -->
+<header class="hero" id="hero">
+  <div class="escena-wrap">
+    <svg id="escena" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Ella sube las escaleras con su toga de graduación y recibe un diploma que baja del cielo">
+      <defs>
+        <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0"  stop-color="#231a20"/>
+          <stop offset=".6" stop-color="#1c1512"/>
+          <stop offset="1"  stop-color="#171210"/>
+        </linearGradient>
+        <linearGradient id="haz" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0"   stop-color="#f6e2ae" stop-opacity=".95"/>
+          <stop offset=".55" stop-color="#e8c179" stop-opacity=".38"/>
+          <stop offset="1"   stop-color="#e8c179" stop-opacity="0"/>
+        </linearGradient>
+        <radialGradient id="aura" cx=".5" cy=".5" r=".5">
+          <stop offset="0"  stop-color="#f6e2ae" stop-opacity=".85"/>
+          <stop offset=".5" stop-color="#e8c179" stop-opacity=".35"/>
+          <stop offset="1"  stop-color="#e8c179" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="luna" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#f0e6cf" stop-opacity=".5"/>
+          <stop offset="1" stop-color="#f0e6cf" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- cielo -->
+      <rect x="0" y="0" width="900" height="460" fill="url(#cielo)"/>
+      <circle cx="812" cy="70" r="90" fill="url(#luna)"/>
+
+      <!-- estrellas -->
+      <g fill="#efe6d2">
+        <circle class="estrella" cx="60"  cy="60"  r="1.6"/>
+        <circle class="estrella" cx="150" cy="120" r="1.2"/>
+        <circle class="estrella" cx="240" cy="50"  r="1.8"/>
+        <circle class="estrella" cx="330" cy="150" r="1.1"/>
+        <circle class="estrella" cx="420" cy="70"  r="1.5"/>
+        <circle class="estrella" cx="520" cy="130" r="1.2"/>
+        <circle class="estrella" cx="610" cy="45"  r="1.7"/>
+        <circle class="estrella" cx="700" cy="150" r="1.2"/>
+        <circle class="estrella" cx="120" cy="200" r="1.3"/>
+        <circle class="estrella" cx="560" cy="210" r="1.4"/>
+        <circle class="estrella" cx="60"  cy="300" r="1.2"/>
+        <circle class="estrella" cx="200" cy="330" r="1.5"/>
+      </g>
+
+      <!-- banderines de graduación -->
+      <g class="banderin-cuerda">
+        <path d="M-10 26 Q 225 76 450 40 Q 675 8 910 60" stroke="#6d5c48" stroke-width="2" fill="none"/>
+        <g>
+          <path d="M60 40  l11 24 l11 -21 z" fill="var(--paprika)"/>
+          <path d="M130 52 l11 24 l11 -20 z" fill="var(--brass)"/>
+          <path d="M200 60 l11 24 l11 -20 z" fill="var(--herb)"/>
+          <path d="M270 62 l11 24 l11 -21 z" fill="var(--paper)"/>
+          <path d="M340 58 l11 24 l11 -21 z" fill="var(--paprika)"/>
+          <path d="M410 48 l11 24 l11 -22 z" fill="var(--brass)"/>
+          <path d="M480 38 l11 24 l11 -22 z" fill="var(--herb)"/>
+          <path d="M550 30 l11 24 l11 -22 z" fill="var(--paper)"/>
+          <path d="M620 26 l11 24 l11 -21 z" fill="var(--paprika)"/>
+          <path d="M690 28 l11 24 l11 -20 z" fill="var(--brass)"/>
+        </g>
+      </g>
+
+      <!-- haz de luz (aparece cuando baja el diploma) -->
+      <polygon id="haz-luz" points="762,-20 878,-20 850,254 778,254" fill="url(#haz)" opacity="0"/>
+
+      <!-- piso -->
+      <rect x="0" y="460" width="900" height="60" fill="#231b16"/>
+      <path d="M0 460 H900" stroke="#3a2d23" stroke-width="2"/>
+
+      <!-- escaleras -->
+      <g>
+        <rect x="400" y="418" width="500" height="42"  fill="#2b211a"/>
+        <rect x="478" y="376" width="422" height="84"  fill="#2e241c"/>
+        <rect x="556" y="334" width="344" height="126" fill="#31261e"/>
+        <rect x="634" y="292" width="266" height="168" fill="#342920"/>
+        <rect x="712" y="250" width="188" height="210" fill="#372b22"/>
+        <!-- bordes de latón en cada peldaño -->
+        <g stroke="var(--brass)" stroke-width="2" opacity=".65">
+          <path d="M400 418 H900"/>
+          <path d="M478 376 H900"/>
+          <path d="M556 334 H900"/>
+          <path d="M634 292 H900"/>
+          <path d="M712 250 H900"/>
+        </g>
+      </g>
+
+      <!-- resplandor detrás de ella -->
+      <ellipse id="aureola-ella" cx="806" cy="185" rx="95" ry="115" fill="url(#aura)" opacity="0"/>
+
+      <!-- ===================== ELLA ===================== -->
+      <g id="chica" style="transform:translate(70px,460px)">
+        <ellipse cx="0" cy="2" rx="24" ry="6" fill="#000" opacity=".35"/>
+        <g class="cuerpo">
+          <!-- piernas -->
+          <g class="pierna p1">
+            <rect x="-10" y="-30" width="7" height="28" rx="3.5" fill="#3a2f28"/>
+            <path d="M-12 -6 h14 a3 3 0 0 1 3 3 v1 h-17 z" fill="#171210"/>
+          </g>
+          <g class="pierna p2">
+            <rect x="3" y="-30" width="7" height="28" rx="3.5" fill="#3a2f28"/>
+            <path d="M1 -6 h14 a3 3 0 0 1 3 3 v1 h-17 z" fill="#171210"/>
+          </g>
+
+          <!-- cabello (detrás de la toga) -->
+          <path d="M-14 -110 C -24 -92 -22 -70 -16 -58 L -4 -66 C -10 -82 -11 -96 -10 -110 Z" fill="#33241b"/>
+
+          <!-- toga -->
+          <path d="M-13 -100 L13 -100 L27 -27 L-27 -27 Z" fill="#1d1815"/>
+          <path d="M-27 -27 L27 -27" stroke="var(--brass)" stroke-width="2.5" opacity=".85"/>
+          <path d="M0 -98 V-30" stroke="#2c2420" stroke-width="2"/>
+          <!-- estola de chef -->
+          <path d="M-9 -100 L-5 -60 L-1 -60 L-4 -100 Z" fill="var(--paper)"/>
+          <path d="M9 -100 L5 -60 L1 -60 L4 -100 Z"  fill="var(--paper)"/>
+
+          <!-- brazos abajo -->
+          <g id="brazos-abajo">
+            <path d="M-13 -95 L-22 -58 a5 5 0 0 0 9 3 L-6 -90 Z" fill="#1d1815"/>
+            <path d="M13 -95 L22 -58 a5 5 0 0 1 -9 3 L6 -90 Z"  fill="#1d1815"/>
+            <circle cx="-19" cy="-54" r="4.5" fill="#e6a97e"/>
+            <circle cx="19"  cy="-54" r="4.5" fill="#e6a97e"/>
+          </g>
+          <!-- brazos arriba (recibiendo) -->
+          <g id="brazos-arriba" opacity="0">
+            <path d="M-12 -95 L-24 -114 a5 5 0 0 1 7 -6 L-3 -98 Z" fill="#1d1815"/>
+            <path d="M12 -95 L24 -114 a5 5 0 0 0 -7 -6 L3 -98 Z"  fill="#1d1815"/>
+            <circle cx="-21" cy="-117" r="4.5" fill="#e6a97e"/>
+            <circle cx="21"  cy="-117" r="4.5" fill="#e6a97e"/>
+          </g>
+
+          <!-- cabeza -->
+          <circle cx="0" cy="-112" r="13" fill="#e6a97e"/>
+          <!-- fleco -->
+          <path d="M-13 -114 a13 13 0 0 1 26 0 l0 5 c-9 -7 -17 -7 -26 0 Z" fill="#33241b"/>
+          <!-- carita -->
+          <circle cx="-4.5" cy="-110" r="1.4" fill="#2a211a"/>
+          <circle cx="4.5"  cy="-110" r="1.4" fill="#2a211a"/>
+          <path d="M-3 -105 Q0 -102 3 -105" stroke="#2a211a" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <circle cx="-8" cy="-106" r="2" fill="#d97d6a" opacity=".55"/>
+          <circle cx="8"  cy="-106" r="2" fill="#d97d6a" opacity=".55"/>
+
+          <!-- birrete -->
+          <path d="M0 -138 L26 -126 L0 -114 L-26 -126 Z" fill="#171210"/>
+          <path d="M0 -138 L26 -126 L0 -122 Z" fill="#221a16"/>
+          <path d="M-10 -121 v5 c0 4.5 20 4.5 20 0 v-5" fill="#241d19"/>
+          <circle cx="0" cy="-126" r="2.4" fill="var(--brass)"/>
+          <g class="borla-mini">
+            <path d="M22 -125 v13" stroke="var(--brass)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M19 -112 h6 l-1 9 h-4 z" fill="var(--brass-lt)"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- ===================== DIPLOMA ANGELITO ===================== -->
+      <g id="diploma" style="transform:translate(806px,-90px)" opacity="0">
+        <g class="diploma-inner">
+          <!-- aureola -->
+          <g class="aureola">
+            <ellipse cx="0" cy="-24" rx="15" ry="5" fill="none" stroke="var(--brass-lt)" stroke-width="2.5" opacity=".95"/>
+          </g>
+          <!-- alas -->
+          <g class="ala ala-l">
+            <path d="M-22 0 C -46 -16 -58 -8 -62 2 C -50 2 -46 6 -40 10 C -34 13 -26 10 -22 4 Z" fill="#f7f1e4"/>
+            <path d="M-26 2 C -40 -6 -50 -2 -54 3" stroke="#d8cdb6" stroke-width="1.5" fill="none"/>
+          </g>
+          <g class="ala ala-r">
+            <path d="M22 0 C 46 -16 58 -8 62 2 C 50 2 46 6 40 10 C 34 13 26 10 22 4 Z" fill="#f7f1e4"/>
+            <path d="M26 2 C 40 -6 50 -2 54 3" stroke="#d8cdb6" stroke-width="1.5" fill="none"/>
+          </g>
+          <!-- pergamino -->
+          <rect x="-26" y="-8" width="52" height="16" rx="8" fill="#efe6d2"/>
+          <rect x="-26" y="-8" width="52" height="16" rx="8" fill="none" stroke="#cbbc9c" stroke-width="1.4"/>
+          <circle cx="-26" cy="0" r="8" fill="#e0d3b4"/>
+          <circle cx="-26" cy="0" r="4" fill="#c9b890"/>
+          <!-- cinta -->
+          <rect x="-5" y="-9" width="10" height="18" fill="var(--paprika)"/>
+          <path d="M0 -9 l-7 -8 l4 -1 l3 5 l3 -5 l4 1 z" fill="var(--paprika)"/>
+        </g>
+      </g>
+
+      <!-- chispas -->
+      <g id="chispas"></g>
+    </svg>
+
+    <button class="saltar" id="saltar">Saltar ›</button>
+  </div>
+
+  <div class="hero-texto" id="hero-texto">
+    <p class="eyebrow">Hoy · Ceremonia de grado</p>
+    <h1>Felicidades,<br><em data-nombre>mi amor</em></h1>
+    <p class="lead">
+      Yo no me enteré hoy. Me enteré la primera vez que me contaste de tu cocina,
+      con esa voz que se te ilumina cuando hablas de lo que amas.
+      Ahí supe quién eras. Hoy el papel solo lo puso por escrito.
+    </p>
+    <div class="acciones">
+      <button class="btn" id="celebrar">Celebrar</button>
+      <button class="btn ghost" id="replay">Ver de nuevo ↻</button>
+    </div>
+  </div>
+
+  <p class="scroll-hint">Baja · te preparé un menú</p>
+</header>
+
+<!-- ============================ CARTA ============================ -->
+<section class="section">
+  <div class="section-head reveal">
+    <p class="eyebrow">Menú de celebración</p>
+    <div class="rule"></div>
+    <h2>Cuatro tiempos,<br>todos sobre ti</h2>
+  </div>
+
+  <div class="carta reveal" style="--d:.12s">
+    <div class="course">
+      <span class="course-label">Aperitivo</span>
+      <h3>Lo supe cuando me lo contaste</h3>
+      <p>Mucho antes de este diploma hubo una noche en que empezaste a hablarme de tu cocina y
+         no paraste. Hablabas con un cariño que no se puede fingir. Ahí entendí que esto no era
+         una carrera para ti: era quién eras. Lo demás era cuestión de tiempo.</p>
+    </div>
+    <div class="course">
+      <span class="course-label">Entrada</span>
+      <h3>Todo lo que nadie vio</h3>
+      <p>El despertador antes que el sol. Los turnos que no terminaban. Las quemaduras,
+         las manos cansadas, el uniforme que ya no volvía a quedar limpio, los días en que
+         te tocó seguir sin ganas. Nada de eso aparece impreso en el diploma —pero yo lo vi,
+         y sé exactamente cuánto costó cada línea de ese papel.</p>
+    </div>
+    <div class="course">
+      <span class="course-label">Plato fuerte</span>
+      <h3>Orgullo, servido caliente</h3>
+      <p>Estoy orgulloso de ti de una forma para la que no me alcanzan las palabras.
+         No solo por lo que lograste hoy, sino por la mujer terca, valiente y talentosa que
+         tuviste que ser todos los días para lograrlo. Verte perseguir esto de cerca ha sido
+         de las cosas más bonitas que me ha tocado presenciar.</p>
+    </div>
+    <div class="course">
+      <span class="course-label">Postre</span>
+      <h3>Y esto apenas empieza</h3>
+      <p>Este no es el final de la carta: es el primer plato. Todo lo que viene —tu cocina,
+         tus platos, tu nombre donde tenga que estar— lo quiero ver completo.
+         Y quiero estar siempre en la primera mesa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ RECETA ============================ -->
+<section class="section">
+  <div class="section-head reveal">
+    <p class="eyebrow">Ficha técnica</p>
+    <div class="rule"></div>
+    <h2>Receta de una chef especializada</h2>
+  </div>
+
+  <div class="receta-wrap reveal" style="--d:.12s">
+    <div class="sello" aria-hidden="true">
+      <span>Especialización</span>
+      <strong>2026</strong>
+      <span>Culminada</span>
+    </div>
+    <div class="receta">
+      <div>
+        <h4>Ingredientes</h4>
+        <ul>
+          <li>Disciplina, en cantidad generosa</li>
+          <li>Madrugadas al gusto</li>
+          <li>2 manos que aprendieron a no temblar</li>
+          <li>1 pizca de locura (indispensable)</li>
+          <li>Lágrimas de cocina, las que hicieron falta</li>
+          <li>Amor por lo que haces, sin medir</li>
+          <li>Terquedad de la buena, al gusto</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Preparación</h4>
+        <ol>
+          <li>Mezclar el sueño con trabajo duro hasta que no se distinga uno del otro.</li>
+          <li>Dejar reposar en noches de estudio y turnos que no terminaban.</li>
+          <li>Cocinar a fuego lento. No apurar el proceso, aunque den ganas.</li>
+          <li>Sacar del horno hoy y servir con la frente en alto.</li>
+        </ol>
+        <p class="rinde">Rinde: una carrera entera.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CAMPANA ============================ -->
+<section class="section cloche-zone">
+  <div class="section-head reveal">
+    <p class="eyebrow">Un plato más, fuera de carta</p>
+    <div class="rule"></div>
+    <h2>Levanta la tapa</h2>
+  </div>
+
+  <button class="cloche reveal" id="cloche" style="--d:.12s" aria-label="Levantar la campana para revelar el mensaje">
+    <svg viewBox="0 0 340 250" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="170" cy="212" rx="132" ry="20" fill="#241d19"/>
+      <ellipse cx="170" cy="205" rx="132" ry="20" fill="#3a2f27"/>
+      <ellipse cx="170" cy="203" rx="108" ry="15" fill="#4a3c31"/>
+      <g class="dome">
+        <path d="M42 204 C42 118 96 62 170 62 C244 62 298 118 298 204 Z" fill="#8e8577"/>
+        <path d="M42 204 C42 118 96 62 170 62 C210 62 240 78 262 104 C232 96 96 118 82 204 Z" fill="#b3aa9a" opacity=".85"/>
+        <path d="M64 204 C66 132 112 80 170 78" stroke="#e4dccc" stroke-width="7" fill="none" opacity=".55" stroke-linecap="round"/>
+        <ellipse cx="170" cy="204" rx="128" ry="13" fill="#6f665a"/>
+        <circle cx="170" cy="52" r="13" fill="var(--brass)"/>
+        <circle cx="166" cy="48" r="4" fill="var(--brass-lt)"/>
+      </g>
+    </svg>
+  </button>
+  <p class="cloche-hint">Tócala</p>
+
+  <div class="secreto" id="secreto">
+    <p>Gracias por dejarme ver de cerca cómo se persigue un sueño. Aprendí mirándote:
+       que el talento solo no alcanza, que hay que levantarse igual los días difíciles,
+       y que cuando amas algo de verdad se te nota en la voz. Hoy te graduaste tú,
+       pero yo también me llevo algo: la certeza de que contigo cualquier cosa es posible.</p>
+    <p class="firma" data-firma>Con todo mi amor, Felipe</p>
+  </div>
+</section>
+
+<!-- ============================ BRINDIS ============================ -->
+<section class="section brindis reveal" id="brindis">
+  <div class="copas">
+    <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g class="copa-l">
+        <path d="M52 34 h56 l-8 44 a20 20 0 0 1 -40 0 z" fill="var(--brass)" opacity=".55"/>
+        <path d="M52 34 h56 l-4 22 h-48 z" fill="var(--brass-lt)" opacity=".8"/>
+        <path d="M80 78 v54" stroke="var(--brass)" stroke-width="4"/>
+        <path d="M58 136 h44" stroke="var(--brass)" stroke-width="5" stroke-linecap="round"/>
+      </g>
+      <g class="copa-r">
+        <path d="M152 34 h56 l-8 44 a20 20 0 0 1 -40 0 z" fill="var(--brass)" opacity=".55"/>
+        <path d="M152 34 h56 l-4 22 h-48 z" fill="var(--brass-lt)" opacity=".8"/>
+        <path d="M180 78 v54" stroke="var(--brass)" stroke-width="4"/>
+        <path d="M158 136 h44" stroke="var(--brass)" stroke-width="5" stroke-linecap="round"/>
+      </g>
+      <g opacity=".9">
+        <path d="M130 22 v-12 M120 30 l-9 -8 M140 30 l9 -8" stroke="var(--brass-lt)" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
+  <h2>¡Salud, chef!</h2>
+  <p class="fecha" data-fecha>20 de agosto de 2026</p>
+</section>
+
+<script>
+/* =========================================================
+   1. PERSONALIZACIÓN — cambia solo estas tres líneas
+   ========================================================= */
+const CONFIG = {
+  nombre: "mi amor",                    // ← el nombre de ella
+  firma:  "Con todo mi amor, Felipe",   // ← tu firma
+  fecha:  "20 de agosto de 2026"        // ← la fecha del grado
+};
+
+document.querySelectorAll('[data-nombre]').forEach(el => el.textContent = CONFIG.nombre);
+document.querySelectorAll('[data-firma]').forEach(el  => el.textContent = CONFIG.firma);
+document.querySelectorAll('[data-fecha]').forEach(el  => el.textContent = CONFIG.fecha);
+
+/* =========================================================
+   2. CONFETI (canvas a pantalla completa)
+   ========================================================= */
+const canvas = document.getElementById('fx');
+const ctx = canvas.getContext('2d');
+let W = 0, H = 0, running = false;
+const parts = [];
+const COLORS = ['#c08a3e', '#e8c179', '#efe6d2', '#a8341f', '#6f7f5c', '#ffffff'];
+const EMOJIS = ['🎓', '🍳', '👩‍🍳', '⭐', '❤️', '🥂'];
+
+function resize(){
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = window.innerWidth; H = window.innerHeight;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+resize();
+window.addEventListener('resize', resize);
+
+function burst(n, ox, oy, power = 1){
+  for (let i = 0; i < n; i++){
+    const ang = Math.random() * Math.PI * 2;
+    const spd = (2.5 + Math.random() * 9) * power;
+    const isEmoji = Math.random() < 0.16;
+    parts.push({
+      x: ox, y: oy,
+      vx: Math.cos(ang) * spd,
+      vy: Math.sin(ang) * spd - 4 * power,
+      g: 0.17 + Math.random() * 0.12,
+      w: 5 + Math.random() * 7, h: 8 + Math.random() * 9,
+      rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.24,
+      flip: Math.random() * Math.PI * 2, vf: 0.08 + Math.random() * 0.1,
+      color: COLORS[(Math.random() * COLORS.length) | 0],
+      emoji: isEmoji ? EMOJIS[(Math.random() * EMOJIS.length) | 0] : null,
+      size: 15 + Math.random() * 14,
+      life: 0, max: 130 + Math.random() * 90
+    });
+  }
+  startFx();
+}
+function frame(){
+  ctx.clearRect(0, 0, W, H);
+  for (let i = parts.length - 1; i >= 0; i--){
+    const p = parts[i];
+    p.life++; p.vy += p.g; p.vx *= .992; p.vy *= .992;
+    p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.flip += p.vf;
+    if (p.life > p.max || p.y > H + 90){ parts.splice(i, 1); continue; }
+    const t = p.life / p.max;
+    ctx.globalAlpha = t > .72 ? 1 - (t - .72) / .28 : 1;
+    ctx.save();
+    ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+    if (p.emoji){
+      ctx.font = p.size + 'px serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(p.emoji, 0, 0);
+    } else {
+      ctx.scale(1, Math.abs(Math.cos(p.flip)) * .85 + .15);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    }
+    ctx.restore();
+  }
+  ctx.globalAlpha = 1;
+  if (parts.length) requestAnimationFrame(frame); else running = false;
+}
+function startFx(){ if (!running){ running = true; requestAnimationFrame(frame); } }
+function lluvia(){
+  let n = 0;
+  const id = setInterval(() => {
+    burst(14, Math.random() * W, -30, .45);
+    if (++n > 7) clearInterval(id);
+  }, 190);
+}
+
+/* =========================================================
+   3. LA ESCENA — ella sube, el diploma baja, ella brilla
+   ========================================================= */
+const reduce   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hero     = document.getElementById('hero');
+const chica    = document.getElementById('chica');
+const cuerpoBrazosAbajo  = document.getElementById('brazos-abajo');
+const cuerpoBrazosArriba = document.getElementById('brazos-arriba');
+const diploma  = document.getElementById('diploma');
+const haz      = document.getElementById('haz-luz');
+const aureola  = document.getElementById('aureola-ella');
+const chispasG = document.getElementById('chispas');
+const heroTxt  = document.getElementById('hero-texto');
+const btnSaltar= document.getElementById('saltar');
+
+let anims = [];        // animaciones activas (para saltar / reiniciar)
+let saltado = false;
+let corriendo = false;
+
+function move(el, frames, duration, easing = 'linear'){
+  const a = el.animate(frames, { duration: saltado ? 1 : duration, easing, fill: 'forwards' });
+  anims.push(a);
+  return a.finished.catch(() => {});
+}
+const espera = ms => new Promise(r => {
+  if (saltado) return r();
+  setTimeout(r, ms);
+});
+
+/* posición de ella en pantalla (para el confeti) */
+function posPantalla(){
+  const r = chica.getBoundingClientRect();
+  return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+}
+
+/* estrellitas doradas dentro de la escena */
+function chispas(cx, cy, n = 16){
+  for (let i = 0; i < n; i++){
+    const s = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    s.setAttribute('d', 'M0 -7 L1.8 -1.8 L7 0 L1.8 1.8 L0 7 L-1.8 1.8 L-7 0 L-1.8 -1.8 Z');
+    s.setAttribute('fill', i % 3 ? '#e8c179' : '#ffffff');
+    chispasG.appendChild(s);
+    const ang = Math.random() * Math.PI * 2;
+    const dist = 34 + Math.random() * 80;
+    const tx = cx + Math.cos(ang) * dist;
+    const ty = cy + Math.sin(ang) * dist * .85;
+    const a = s.animate([
+      { transform: `translate(${cx}px,${cy}px) scale(0) rotate(0deg)`,          opacity: 1 },
+      { transform: `translate(${tx}px,${ty}px) scale(${.7 + Math.random()}) rotate(150deg)`, opacity: 1, offset: .6 },
+      { transform: `translate(${tx}px,${ty}px) scale(0) rotate(220deg)`,        opacity: 0 }
+    ], { duration: 1100 + Math.random() * 700, delay: Math.random() * 450, easing: 'cubic-bezier(.2,.8,.3,1)' });
+    a.onfinish = () => s.remove();
+  }
+}
+
+/* estado inicial de la escena */
+function resetEscena(){
+  anims.forEach(a => a.cancel());
+  anims = [];
+  saltado = false;
+  chica.classList.remove('walking', 'brilla');
+  chica.style.transform = 'translate(70px,460px)';
+  diploma.style.transform = 'translate(806px,-90px)';
+  diploma.style.opacity = '0';
+  diploma.classList.remove('bajando');
+  diploma.querySelector('.ala-l').style.opacity = '1';
+  diploma.querySelector('.ala-r').style.opacity = '1';
+  haz.setAttribute('opacity', '0');
+  aureola.setAttribute('opacity', '0');
+  cuerpoBrazosAbajo.style.opacity = '1';
+  cuerpoBrazosArriba.style.opacity = '0';
+  heroTxt.classList.remove('show');
+  hero.classList.remove('fin');
+  btnSaltar.classList.remove('oculto');
+  chispasG.innerHTML = '';
+}
+
+/* la secuencia completa */
+async function contarLaHistoria(){
+  if (corriendo) return;
+  corriendo = true;
+  resetEscena();
+  await espera(600);
+
+  /* 1 — camina por el piso */
+  chica.classList.add('walking');
+  await move(chica,
+    [{ transform: 'translate(70px,460px)' }, { transform: 'translate(388px,460px)' }],
+    3400);
+
+  /* 2 — sube los cinco peldaños */
+  const pasos = [[439,418],[517,376],[595,334],[673,292],[751,250]];
+  let px = 388, py = 460;
+  for (const [nx, ny] of pasos){
+    await move(chica, [
+      { transform: `translate(${px}px,${py}px)` },
+      { transform: `translate(${(px+nx)/2}px,${ny-16}px)`, offset: .5 },
+      { transform: `translate(${nx}px,${ny}px)` }
+    ], 640, 'ease-in-out');
+    px = nx; py = ny;
+  }
+
+  /* 3 — llega al centro del estrado */
+  await move(chica,
+    [{ transform: `translate(${px}px,${py}px)` }, { transform: 'translate(806px,250px)' }],
+    950);
+  chica.classList.remove('walking');
+  await espera(350);
+
+  /* 4 — se abre el cielo y baja el diploma como un angelito */
+  move(haz, [{ opacity: 0 }, { opacity: 1 }], 900, 'ease-out');
+  diploma.style.opacity = '1';
+  diploma.classList.add('bajando');
+  await move(diploma, [
+    { transform: 'translate(806px,-90px) rotate(0deg)' },
+    { transform: 'translate(790px,10px) rotate(-7deg)',  offset: .3 },
+    { transform: 'translate(822px,75px) rotate(6deg)',   offset: .62 },
+    { transform: 'translate(806px,131px) rotate(0deg)' }
+  ], 2800, 'ease-in-out');
+
+  /* 5 — lo recibe: brazos arriba, las alitas se despiden y ELLA BRILLA */
+  cuerpoBrazosAbajo.style.opacity = '0';
+  cuerpoBrazosArriba.style.opacity = '1';
+  diploma.classList.remove('bajando');
+  move(diploma.querySelector('.ala-l'), [{ opacity: 1 }, { opacity: 0 }], 700);
+  move(diploma.querySelector('.ala-r'), [{ opacity: 1 }, { opacity: 0 }], 700);
+  move(aureola, [
+    { opacity: 0, transform: 'scale(.5)', transformOrigin: '806px 185px' },
+    { opacity: 1, transform: 'scale(1.18)', transformOrigin: '806px 185px', offset: .55 },
+    { opacity: .9, transform: 'scale(1)', transformOrigin: '806px 185px' }
+  ], 1100, 'ease-out');
+  chica.classList.add('brilla');
+
+  if (!saltado && !reduce){
+    chispas(806, 180, 18);
+    setTimeout(() => chispas(806, 160, 12), 600);
+    const p = posPantalla();
+    burst(80, p.x, p.y, 1.1);
+    lluvia();
+  }
+  move(haz, [{ opacity: 1 }, { opacity: .45 }], 1400);
+  await espera(900);
+
+  /* 6 — el mensaje */
+  heroTxt.classList.add('show');
+  hero.classList.add('fin');
+  btnSaltar.classList.add('oculto');
+  corriendo = false;
+}
+
+/* saltar la intro */
+btnSaltar.addEventListener('click', () => {
+  saltado = true;
+  anims.forEach(a => { try{ a.finish(); }catch(e){} });
+});
+
+/* ver de nuevo */
+document.getElementById('replay').addEventListener('click', () => {
+  hero.scrollIntoView({ behavior: 'smooth' });
+  corriendo = false;
+  contarLaHistoria();
+});
+
+/* arranque */
+window.addEventListener('load', () => {
+  if (reduce){
+    saltado = true;
+    contarLaHistoria();
+  } else {
+    contarLaHistoria();
+  }
+});
+
+/* =========================================================
+   4. RESTO DE LA PÁGINA
+   ========================================================= */
+document.getElementById('celebrar').addEventListener('click', e => {
+  const r = e.currentTarget.getBoundingClientRect();
+  burst(90, r.left + r.width / 2, r.top + r.height / 2, 1.25);
+  lluvia();
+});
+
+const cloche  = document.getElementById('cloche');
+const secreto = document.getElementById('secreto');
+let abierta = false;
+cloche.addEventListener('click', () => {
+  if (abierta) return;
+  abierta = true;
+  cloche.classList.add('open');
+  const r = cloche.getBoundingClientRect();
+  burst(80, r.left + r.width / 2, r.top + r.height * .5, 1);
+  setTimeout(() => secreto.classList.add('show'), 380);
+});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting){
+      en.target.classList.add('in');
+      io.unobserve(en.target);
+      if (en.target.id === 'brindis' && !reduce){
+        setTimeout(() => { burst(60, W * .5, H * .55, 1); lluvia(); }, 700);
+      }
+    }
+  });
+}, { threshold: .2 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* chispitas donde toque la pantalla */
+document.addEventListener('pointerdown', e => {
+  if (e.target.closest('button')) return;
+  burst(9, e.clientX, e.clientY, .42);
+});
+</script>
+</body>
+</html>
