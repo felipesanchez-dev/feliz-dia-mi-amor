@@ -383,6 +383,11 @@ body::before{
   color:#7d6b57;
 }
 
+@media (max-width:640px){
+  .hero{ padding:1rem .4rem 4rem; }
+  .escena-wrap{ width:100vw; }
+  .hero-texto{ padding:0 1.2rem; }
+}
 @media (max-width:720px){
   .receta{ grid-template-columns:1fr; }
   .sello{ width:92px; height:92px; top:-22px; right:-4px; }
@@ -629,7 +634,7 @@ body::before{
       </g>
 
       <!-- corazón del besito -->
-      <g id="corazon" style="transform:translate(783px,92px)" opacity="0">
+      <g id="corazon" style="transform:translate(783px,78px)" opacity="0">
         <path id="corazon-path"
               d="M0,10 C-3,3 -15,-7 -15,-17 C-15,-27 -5,-30 0,-22 C5,-30 15,-27 15,-17 C15,-7 3,3 0,10 Z"
               fill="var(--paprika)" stroke="var(--brass-lt)" stroke-width="1.6"
@@ -894,6 +899,15 @@ function lluvia(){
    ========================================================= */
 const reduce   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hero     = document.getElementById('hero');
+const escena   = document.getElementById('escena');
+
+/* en teléfono recortamos la vista a la zona de la acción */
+const esMovil = () => window.innerWidth < 640;
+function ajustarVista(){
+  escena.setAttribute('viewBox', esMovil() ? '350 0 550 520' : '0 0 900 520');
+}
+ajustarVista();
+window.addEventListener('resize', ajustarVista);
 const chica    = document.getElementById('chica');
 const cuerpoBrazosAbajo  = document.getElementById('brazos-abajo');
 const cuerpoBrazosArriba = document.getElementById('brazos-arriba');
@@ -965,14 +979,18 @@ function corazoncitos(cx, cy, n = 9){
 }
 
 /* estado inicial de la escena */
+let inicioChica = 70, inicioFelipe = -70;
 function resetEscena(){
   anims.forEach(a => a.cancel());
   anims = [];
   saltado = false;
+  ajustarVista();
+  inicioChica  = esMovil() ? 300 : 70;
+  inicioFelipe = esMovil() ? 290 : -70;
   chica.classList.remove('walking', 'brilla', 'lean-l');
-  chica.style.transform = 'translate(70px,460px)';
+  chica.style.transform = `translate(${inicioChica}px,460px)`;
   felipe.classList.remove('walking', 'lean-r');
-  felipe.style.transform = 'translate(-70px,460px)';
+  felipe.style.transform = `translate(${inicioFelipe}px,460px)`;
   corazon.style.opacity = '0';
   corazonPath.classList.remove('late');
   corazonPath.style.transform = 'scale(0)';
@@ -1000,8 +1018,8 @@ async function contarLaHistoria(){
   /* 1 — camina por el piso */
   chica.classList.add('walking');
   await move(chica,
-    [{ transform: 'translate(70px,460px)' }, { transform: 'translate(388px,460px)' }],
-    3400);
+    [{ transform: `translate(${inicioChica}px,460px)` }, { transform: 'translate(388px,460px)' }],
+    Math.round((388 - inicioChica) * 10.5));
 
   /* 2 — sube los cinco peldaños */
   const pasos = [[439,418],[517,376],[595,334],[673,292],[751,250]];
@@ -1030,7 +1048,7 @@ async function contarLaHistoria(){
     { transform: 'translate(806px,-90px) rotate(0deg)' },
     { transform: 'translate(790px,10px) rotate(-7deg)',  offset: .3 },
     { transform: 'translate(822px,75px) rotate(6deg)',   offset: .62 },
-    { transform: 'translate(806px,131px) rotate(0deg)' }
+    { transform: 'translate(806px,112px) rotate(0deg)' }
   ], 2800, 'ease-in-out');
 
   /* 5 — lo recibe: brazos arriba, las alitas se despiden y ELLA BRILLA */
@@ -1059,8 +1077,8 @@ async function contarLaHistoria(){
   /* 6 — llega él, con flores, a darle su besito */
   felipe.classList.add('walking');
   await move(felipe,
-    [{ transform: 'translate(-70px,460px)' }, { transform: 'translate(388px,460px)' }],
-    2500);
+    [{ transform: `translate(${inicioFelipe}px,460px)` }, { transform: 'translate(388px,460px)' }],
+    Math.round((388 - inicioFelipe) * 5.5));
   let fx = 388, fy = 460;
   for (const [nx, ny] of pasos){
     await move(felipe, [
@@ -1080,8 +1098,8 @@ async function contarLaHistoria(){
   felipe.classList.add('lean-r');
   chica.classList.add('lean-l');
   move(diploma, [
-    { transform: 'translate(806px,131px) rotate(0deg)' },
-    { transform: 'translate(794px,134px) rotate(-8deg)' }
+    { transform: 'translate(806px,112px) rotate(0deg)' },
+    { transform: 'translate(792px,116px) rotate(-8deg)' }
   ], 650, 'ease-out');
   await espera(680);
 
@@ -1109,8 +1127,8 @@ async function contarLaHistoria(){
   felipe.classList.remove('lean-r');
   chica.classList.remove('lean-l');
   move(diploma, [
-    { transform: 'translate(794px,134px) rotate(-8deg)' },
-    { transform: 'translate(806px,131px) rotate(0deg)' }
+    { transform: 'translate(792px,116px) rotate(-8deg)' },
+    { transform: 'translate(806px,112px) rotate(0deg)' }
   ], 650, 'ease-out');
   await espera(500);
 
