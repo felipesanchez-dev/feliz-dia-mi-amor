@@ -125,6 +125,14 @@ body::before{
   50%    { filter:drop-shadow(0 0 16px rgba(232,193,121,1))   drop-shadow(0 0 40px rgba(232,193,121,.7)); }
 }
 
+/* saludo con la mano */
+.saludo-brazo{ transform-box:fill-box; transform-origin:20% 90%; }
+.saludando .saludo-brazo{ animation:saluda .9s ease-in-out infinite; }
+@keyframes saluda{
+  0%,100%{ transform:rotate(-14deg); }
+  50%    { transform:rotate(16deg); }
+}
+
 /* el besito: se inclinan el uno hacia el otro */
 .cuerpo{
   transform-box:fill-box;
@@ -583,6 +591,16 @@ body::before{
             <circle cx="21"  cy="-117" r="4.5" fill="#e6a97e"/>
           </g>
 
+          <!-- brazos saludando (diploma en una mano) -->
+          <g id="brazos-saludo" opacity="0">
+            <path d="M-12 -95 L-20 -66 a5 5 0 0 0 9 3 L-5 -90 Z" fill="#1d1815"/>
+            <circle cx="-16" cy="-62" r="4.5" fill="#e6a97e"/>
+            <g class="saludo-brazo">
+              <path d="M12 -95 L26 -112 a5 5 0 0 0 -6 -7 L4 -98 Z" fill="#1d1815"/>
+              <circle cx="23" cy="-116" r="4.5" fill="#e6a97e"/>
+            </g>
+          </g>
+
           <!-- cabeza -->
           <circle cx="0" cy="-112" r="13" fill="#e6a97e"/>
           <!-- fleco -->
@@ -915,6 +933,7 @@ const diploma  = document.getElementById('diploma');
 const felipe   = document.getElementById('felipe');
 const corazon  = document.getElementById('corazon');
 const corazonPath = document.getElementById('corazon-path');
+const brazosSaludo = document.getElementById('brazos-saludo');
 const haz      = document.getElementById('haz-luz');
 const aureola  = document.getElementById('aureola-ella');
 const chispasG = document.getElementById('chispas');
@@ -987,7 +1006,7 @@ function resetEscena(){
   ajustarVista();
   inicioChica  = esMovil() ? 300 : 70;
   inicioFelipe = esMovil() ? 290 : -70;
-  chica.classList.remove('walking', 'brilla', 'lean-l');
+  chica.classList.remove('walking', 'brilla', 'lean-l', 'saludando');
   chica.style.transform = `translate(${inicioChica}px,460px)`;
   felipe.classList.remove('walking', 'lean-r');
   felipe.style.transform = `translate(${inicioFelipe}px,460px)`;
@@ -1003,6 +1022,7 @@ function resetEscena(){
   aureola.setAttribute('opacity', '0');
   cuerpoBrazosAbajo.style.opacity = '1';
   cuerpoBrazosArriba.style.opacity = '0';
+  brazosSaludo.style.opacity = '0';
   heroTxt.classList.remove('show');
   hero.classList.remove('fin');
   chispasG.innerHTML = '';
@@ -1072,9 +1092,18 @@ async function contarLaHistoria(){
     lluvia();
   }
   move(haz, [{ opacity: 1 }, { opacity: .45 }], 1400);
-  await espera(900);
+  await espera(1000);
 
-  /* 6 — llega él, con flores, a darle su besito */
+  /* 6 — baja el diploma a una mano y saluda con la otra */
+  cuerpoBrazosArriba.style.opacity = '0';
+  brazosSaludo.style.opacity = '1';
+  chica.classList.add('saludando');
+  await move(diploma, [
+    { transform: 'translate(806px,112px) rotate(0deg)' },
+    { transform: 'translate(790px,186px) rotate(-35deg)' }
+  ], 800, 'ease-in-out');
+
+  /* 7 — llega él, con flores, a darle su besito */
   felipe.classList.add('walking');
   await move(felipe,
     [{ transform: `translate(${inicioFelipe}px,460px)` }, { transform: 'translate(388px,460px)' }],
@@ -1094,12 +1123,13 @@ async function contarLaHistoria(){
   felipe.classList.remove('walking');
   await espera(300);
 
-  /* 7 — el besito y el corazón */
+  /* 8 — el besito y el corazón */
+  chica.classList.remove('saludando');
   felipe.classList.add('lean-r');
   chica.classList.add('lean-l');
   move(diploma, [
-    { transform: 'translate(806px,112px) rotate(0deg)' },
-    { transform: 'translate(792px,116px) rotate(-8deg)' }
+    { transform: 'translate(790px,186px) rotate(-35deg)' },
+    { transform: 'translate(779px,191px) rotate(-44deg)' }
   ], 650, 'ease-out');
   await espera(680);
 
@@ -1127,9 +1157,10 @@ async function contarLaHistoria(){
   felipe.classList.remove('lean-r');
   chica.classList.remove('lean-l');
   move(diploma, [
-    { transform: 'translate(792px,116px) rotate(-8deg)' },
-    { transform: 'translate(806px,112px) rotate(0deg)' }
+    { transform: 'translate(779px,191px) rotate(-44deg)' },
+    { transform: 'translate(790px,186px) rotate(-35deg)' }
   ], 650, 'ease-out');
+  chica.classList.add('saludando');
   await espera(500);
 
   /* 8 — el mensaje */
